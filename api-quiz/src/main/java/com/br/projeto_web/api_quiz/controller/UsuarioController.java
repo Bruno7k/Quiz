@@ -1,5 +1,7 @@
 package com.br.projeto_web.api_quiz.controller;
 
+import com.br.projeto_web.api_quiz.dto.LoginRequestDTO;
+import com.br.projeto_web.api_quiz.dto.LoginResponseDTO;
 import com.br.projeto_web.api_quiz.model.Usuario;
 import com.br.projeto_web.api_quiz.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +28,13 @@ public class UsuarioController {
     }
 
     @PostMapping("/salvar")
-    public ResponseEntity<Usuario> salvar(@RequestBody Usuario usuario){
+    public ResponseEntity<LoginResponseDTO> salvar(@RequestBody Usuario usuario){
         return ResponseEntity.status(201).body(usuarioService.salvar(usuario));
+    }
+
+    @PostMapping("/logar")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO){
+        return ResponseEntity.status(200).body(usuarioService.login(loginRequestDTO));
     }
 
     @PutMapping("/atualizar/{id}")
