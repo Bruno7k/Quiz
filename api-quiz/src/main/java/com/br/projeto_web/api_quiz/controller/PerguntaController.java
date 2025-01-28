@@ -1,6 +1,7 @@
 package com.br.projeto_web.api_quiz.controller;
 
 import com.br.projeto_web.api_quiz.model.Pergunta;
+import com.br.projeto_web.api_quiz.repository.PerguntaRepository;
 import com.br.projeto_web.api_quiz.service.PerguntaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,11 @@ public class PerguntaController {
     @GetMapping("/listar")
     public ResponseEntity<List<Pergunta>> listar(){
         return ResponseEntity.status(200).body(perguntaService.listar());
+    }
+
+    @GetMapping("/gerarQuestionario")
+    public ResponseEntity<List<Pergunta>> gerarQuestionario(){
+        return ResponseEntity.status(200).body(perguntaService.gerarQuestionario());
     }
 
     @GetMapping("/obter/{id}")

@@ -1,0 +1,79 @@
+@use "/src/util/variables.scss";
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: variables.$background-gradient;
+  font-family: "Arial, sans-serif";
+  text-align: center;
+
+  .buttons-wrapper {
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 1rem;
+    z-index: 1;
+  }
+
+  img {
+    max-width: 25%;
+    height: auto;
+  }
+
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: variables.$gray;
+    font-family: variables.$font-family;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    font-size: 1.2rem;
+    padding: 0.8rem 5rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &.botao-jogar {
+      background: variables.$primary-color;
+      color: variables.$white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+
+    &.botao-sobre {
+      background: transparent;
+      color: variables.$white;
+      border: 2px solid variables.$primary-color;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .title {
+      font-size: 1.5rem;
+    }
+
+    button {
+      font-size: 1rem;
+      padding: 0.6rem 1.5rem;
+    }
+  }
+}

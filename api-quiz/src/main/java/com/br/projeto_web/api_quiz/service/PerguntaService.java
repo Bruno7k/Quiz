@@ -6,6 +6,7 @@ import com.br.projeto_web.api_quiz.repository.PerguntaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +17,24 @@ public class PerguntaService {
 
     public List<Pergunta> listar(){
         return perguntaRepository.findAll();
+    }
+
+    public List<Pergunta> gerarQuestionario(){
+        List<Pergunta> perguntaList =  perguntaRepository.findAll();
+
+        List<Pergunta> questionario = new ArrayList<>();
+
+        if(perguntaList.size() < 10){
+            throw new EntidadeNaoEncontradaException("Não há perguntas suficientes para gerar um questionário!");
+        }
+
+        for(int i = 0; i < 10; i++){
+            int index = (int) (Math.random() * perguntaList.size());
+            questionario.add(perguntaList.get(index));
+            perguntaList.remove(index);
+        }
+
+        return questionario;
     }
 
     public Pergunta obtemPerguntaPorId(Long id){
