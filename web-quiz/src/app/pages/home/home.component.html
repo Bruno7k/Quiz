@@ -1,0 +1,111 @@
+<main>
+  <nav class="right-top-buttons">
+    <mat-icon class="icon" (click)="abrirModalEditarPerfil()"
+      >account_circle</mat-icon
+    >
+    <mat-icon class="icon" (click)="abrirModalSair()">exit_to_app</mat-icon>
+  </nav>
+  <div class="images-container">
+    <img src="logo.svg" alt="Logo" />
+    <img src="bonequinho-no-pc.svg" alt="Bonequinho no PC" />
+  </div>
+
+  <h1>
+    Bem Vindo, <span>{{ usuarioLogado.nome }}</span
+    >! Vamos Jogar?
+  </h1>
+
+  <div class="button-container">
+    <app-secondary-button
+      buttonLabel="Jogar"
+      (click)="jogar()"
+    ></app-secondary-button>
+    <app-outlined-button
+      buttonLabel="Sobre"
+      (click)="abrirModalAjuda()"
+    ></app-outlined-button>
+  </div>
+
+  <!-- Modal Sobre -->
+  @if (modalAjudaAberto) {
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn" (click)="fecharModalAjuda()">×</span>
+      <h2>Sobre</h2>
+      <p class="modal-text">
+        Ao clicar em "Jogar", você começará um jogo com 10 perguntas da área
+        tech. Responda com sabedoria e, ao final, descubra quantas questões
+        acertou!
+      </p>
+    </div>
+  </div>
+  }
+
+  <!-- Modal Deseja Mesmo Sair -->
+  @if (modalSairAberto) {
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn" (click)="fecharModalSair()">×</span>
+      <h2>Deseja mesmo sair?</h2>
+      <div class="footer-wrapper">
+        <button (click)="sair()">Sim</button>
+        <button (click)="fecharModalSair()" class="botao-negativo">Não</button>
+      </div>
+    </div>
+  </div>
+  }
+
+  <!-- Modal Editar Perfil -->
+  @if (modalEditarPerfilAberto ) {
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-btn" (click)="fecharModalEditarPerfil()">×</span>
+      <h2>Editar Perfil</h2>
+      <form [formGroup]="editarPerfilForm">
+        <app-primary-input
+          labelTitle="Nome Completo:"
+          type="text"
+          placeholder="Digite seu nome completo"
+          name="nomeCompleto"
+          formControlName="nomeCompleto"
+        >
+        </app-primary-input>
+
+        <app-primary-input
+          labelTitle="E-mail:"
+          type="text"
+          placeholder="Email"
+          name="email"
+          formControlName="email"
+        >
+        </app-primary-input>
+
+        @if (alterarSenha) {
+        <app-primary-input
+          labelTitle="Alterar Senha:"
+          type="password"
+          placeholder="Nova Senha"
+          name="senha"
+          formControlName="novaSenha"
+        >
+        </app-primary-input>
+        }
+
+        <div class="footer-wrapper">
+          <label for="alterarSenha" class="alterar-senha">
+            <input
+              type="checkbox"
+              id="alterarSenha"
+              name="alterarSenha"
+              (change)="toggleAlterarSenha()"
+            />
+            Deseja alterar senha?
+          </label>
+
+          <button (click)="atualizarPerfil()">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  }
+</main>

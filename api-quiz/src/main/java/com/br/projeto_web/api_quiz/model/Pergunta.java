@@ -28,6 +28,9 @@ public class Pergunta {
     @Column(name = "alternativa_3", nullable = false, length = 255)
     private String alternativa3;
 
+    @Column(name = "alternativa_4", nullable = false, length = 255)
+    private String alternativa4;
+
     @Column(name = "alternativa_Certa", nullable = false, length = 255)
     private String alternativaCerta;
 }

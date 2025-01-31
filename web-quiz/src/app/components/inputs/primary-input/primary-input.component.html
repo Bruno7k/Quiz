@@ -1,0 +1,20 @@
+<div class="primary-input-container">
+  <label [for]="name">{{ labelTitle }}</label>
+  <div class="input-wrapper">
+    <input
+      [id]="name"
+      [type]="inputType"
+      [placeholder]="placeholder"
+      [name]="name"
+      [value]="innerValue"
+      (input)="onInputChange($event)"
+    />
+    @if (type == 'password') {
+    <span class="eye-icon" (click)="togglePasswordVisibility()">
+      <mat-icon>{{
+        isPasswordVisible ? "visibility" : "visibility_off"
+      }}</mat-icon>
+    </span>
+    }
+  </div>
+</div>

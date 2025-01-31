@@ -1,0 +1,35 @@
+<main>
+  <div class="images-container">
+    <img src="logo.svg" alt="Logo" />
+  </div>
+
+  @for (pergunta of perguntas; track $index) { @if (pergunta.jaRespondida) {
+  <div class="pergunta-container">
+    <h1>Pergunta {{ $index + 1 }}</h1>
+    <h2>{{ pergunta.enunciado }}</h2>
+  </div>
+
+  <div class="alternativas-container">
+    <app-question-option-button
+      [buttonLabel]="pergunta.alternativa1"
+      (click)="responder($index, '1')"
+      [isTheCorrectAnswer]="verificaAlternativa($index, '1')"
+    />
+    <app-question-option-button
+      [buttonLabel]="pergunta.alternativa2"
+      (click)="responder($index, '2')"
+      [isTheCorrectAnswer]="verificaAlternativa($index, '2')"
+    />
+    <app-question-option-button
+      [buttonLabel]="pergunta.alternativa3"
+      (click)="responder($index, '3')"
+      [isTheCorrectAnswer]="verificaAlternativa($index, '3')"
+    />
+    <app-question-option-button
+      [buttonLabel]="pergunta.alternativa4"
+      (click)="responder($index, '4')"
+      [isTheCorrectAnswer]="verificaAlternativa($index, '4')"
+    />
+  </div>
+  } }
+</main>

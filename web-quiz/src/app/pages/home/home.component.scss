@@ -1,0 +1,131 @@
+@use "../../../variables.scss";
+
+main {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: variables.$background-gradient;
+  position: relative;
+
+  .right-top-buttons {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    gap: 20px;
+    margin: 3em;
+
+    .icon {
+      color: variables.$white;
+      font-size: 3rem;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .images-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+
+    img {
+      max-width: 80%;
+      margin-bottom: -40px;
+    }
+  }
+
+  h1 {
+    color: variables.$white;
+    font-size: 2.5rem;
+    margin-top: 20px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  /* Estilos do Modal */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+  }
+
+  h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+
+  h2,
+  .modal-text {
+    text-align: center;
+  }
+
+  .footer-wrapper {
+    display: flex;
+    justify-content: space-around;
+
+    .alterar-senha {
+      margin-top: 0.4em;
+    }
+  }
+
+  button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .botao-negativo {
+    background-color: #dc3545;
+  }
+
+  button:hover {
+    background-color: #218838;
+  }
+
+  .botao-negativo:hover {
+    background-color: #c82333;
+  }
+}

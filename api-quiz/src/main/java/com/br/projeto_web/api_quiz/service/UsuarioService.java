@@ -9,6 +9,8 @@ import com.br.projeto_web.api_quiz.exception.InvalidPasswordException;
 import com.br.projeto_web.api_quiz.model.Usuario;
 import com.br.projeto_web.api_quiz.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,16 @@ public class UsuarioService {
 
     public Usuario obtemUsuarioPorId(Long id){
         return usuarioRepository.findById(id).orElseThrow(EntidadeNaoEncontradaException::new);
+    }
+
+    public Usuario obtemUsuarioLogado(){
+        var principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        if(principal instanceof Usuario){
+            return (Usuario) principal;
+        }else{
+            throw new EntidadeNaoEncontradaException("Usuário não logado");
+        }
     }
 
     public LoginResponseDTO salvar(Usuario usuario){
@@ -59,29 +71,31 @@ public class UsuarioService {
 
     }
 
-    public Usuario atualizar(Long id, Usuario usuario){
-        Usuario usuarioAtual = obtemUsuarioPorId(id);
+    public Usuario atualizar(Usuario usuario){
+        Usuario usuarioAtual = obtemUsuarioLogado();
 
-        if(usuario.getNome() != null){
+        if(usuario.getNome() != null && !usuario.getNome().isEmpty()){
             usuarioAtual.setNome(usuario.getNome());
         }
 
-        if(usuario.getEmail() != null){
+        if(usuario.getEmail() != null && !usuario.getEmail().isEmpty()){
             usuarioAtual.setEmail(usuario.getEmail());
         }
 
-        if(usuario.getSenha() != null){
-            usuarioAtual.setSenha(usuario.getSenha());
+        if(usuario.getSenha() != null && !usuario.getSenha().isEmpty()){
+            String senhaCriptografada = passwordEncoder.encode(usuario.getSenha());
+            usuarioAtual.setSenha(senhaCriptografada);
         }
 
-        if(usuario.getPermissao() != null){
+        if(usuario.getPermissao() != null && !usuario.getPermissao().isEmpty()){
             usuarioAtual.setPermissao(usuario.getPermissao());
         }
 
         return usuarioRepository.save(usuarioAtual);
     }
 
-    public void deletar(Long id){
-        usuarioRepository.deleteById(id);
+    public void deletar(){
+        Usuario usuarioLogado = obtemUsuarioLogado();
+        usuarioRepository.delete(usuarioLogado);
     }
 }

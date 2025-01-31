@@ -1,4 +1,4 @@
-import UserDTO from "./UserDTO";
+import UserDTO from './UsuarioDTO';
 
 export default class LoginRegisterResponseDTO {
   usuario: UserDTO;

@@ -1,0 +1,31 @@
+<app-login-register-layout>
+  <h1>Entre em sua conta!</h1>
+
+  <form [formGroup]="loginForm">
+    <app-primary-input
+      labelTitle="E-mail:"
+      type="text"
+      placeholder="Email"
+      name="email"
+      formControlName="email"
+    >
+    </app-primary-input>
+
+    <app-primary-input
+      labelTitle="Senha:"
+      type="password"
+      placeholder="Senha"
+      name="senha"
+      formControlName="senha"
+    >
+    </app-primary-input>
+
+    <app-primary-button
+      buttonLabel="Entrar"
+      buttonType="submit"
+      (onClick)="efetuarLogin()"
+    >
+    </app-primary-button>
+  </form>
+  <p>Não tem uma conta? <a href="/registro">Registre-se</a></p>
+</app-login-register-layout>

@@ -1,0 +1,18 @@
+<main>
+  <div class="images-container">
+    <img src="logo.svg" alt="Logo" />
+  </div>
+
+  <div class="resultado-container">
+    <h1>
+      {{ getResposta() }} <br />
+      Você Tirou:
+    </h1>
+    <h2>{{ quantidadeAcertos }}/10</h2>
+  </div>
+
+  <div class="buttons-container">
+    <app-secondary-button buttonLabel="Jogar Novamente" redirectTo="/quiz" />
+    <app-outlined-button buttonLabel="Pagina Inicial" redirectTo="/" />
+  </div>
+</main>

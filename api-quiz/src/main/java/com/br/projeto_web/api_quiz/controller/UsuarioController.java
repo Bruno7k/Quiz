@@ -6,6 +6,8 @@ import com.br.projeto_web.api_quiz.model.Usuario;
 import com.br.projeto_web.api_quiz.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +29,11 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuarioService.obtemUsuarioPorId(id));
     }
 
+    @GetMapping("/obterLogado")
+    public ResponseEntity<Usuario> obterLogado(){
+        return ResponseEntity.status(200).body(usuarioService.obtemUsuarioLogado());
+    }
+
     @PostMapping("/salvar")
     public ResponseEntity<LoginResponseDTO> salvar(@RequestBody Usuario usuario){
         return ResponseEntity.status(201).body(usuarioService.salvar(usuario));
@@ -37,14 +44,14 @@ public class UsuarioController {
         return ResponseEntity.status(200).body(usuarioService.login(loginRequestDTO));
     }
 
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Usuario> atualizar(@PathVariable Long id, @RequestBody Usuario usuario){
-        return ResponseEntity.status(200).body(usuarioService.atualizar(id, usuario));
+    @PutMapping("/atualizar")
+    public ResponseEntity<Usuario> atualizar(@RequestBody Usuario usuario){
+        return ResponseEntity.status(200).body(usuarioService.atualizar(usuario));
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
-        usuarioService.deletar(id);
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Void> deletar(){
+        usuarioService.deletar();
         return ResponseEntity.status(204).build();
     }
 }

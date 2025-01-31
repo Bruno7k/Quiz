@@ -29,8 +29,8 @@ public class PerguntaController {
         return ResponseEntity.status(200).body(perguntaService.gerarQuestionario());
     }
 
-    @GetMapping("/obter/{id}")
-    public ResponseEntity<Pergunta> obter(@PathVariable Long id){
+    @GetMapping("/obter")
+    public ResponseEntity<Pergunta> obter(@RequestParam("id") Long id){
         return ResponseEntity.status(200).body(perguntaService.obtemPerguntaPorId(id));
     }
 
@@ -39,13 +39,13 @@ public class PerguntaController {
         return ResponseEntity.status(201).body(perguntaService.salvar(pergunta));
     }
 
-    @PutMapping("/atualizar/{id}")
-    public ResponseEntity<Pergunta> atualizar(@PathVariable Long id, @RequestBody Pergunta pergunta){
+    @PutMapping("/atualizar")
+    public ResponseEntity<Pergunta> atualizar(@RequestParam("id") Long id, @RequestBody Pergunta pergunta){
         return ResponseEntity.status(200).body(perguntaService.atualizar(id, pergunta));
     }
 
-    @DeleteMapping("/deletar/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id){
+    @DeleteMapping("/deletar")
+    public ResponseEntity<Void> deletar(@RequestParam("id") Long id){
         perguntaService.deletar(id);
         return ResponseEntity.status(204).build();
     }

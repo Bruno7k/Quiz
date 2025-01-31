@@ -1,0 +1,40 @@
+<app-login-register-layout>
+  <h1>Crie sua conta!</h1>
+
+  <form [formGroup]="registroForm">
+    <app-primary-input
+      labelTitle="Nome Completo:"
+      type="text"
+      placeholder="Digite seu nome completo"
+      name="nomeCompleto"
+      formControlName="nomeCompleto"
+    >
+    </app-primary-input>
+
+    <app-primary-input
+      labelTitle="E-mail:"
+      type="text"
+      placeholder="Email"
+      name="email"
+      formControlName="email"
+    >
+    </app-primary-input>
+
+    <app-primary-input
+      labelTitle="Senha:"
+      type="password"
+      placeholder="Senha"
+      name="senha"
+      formControlName="senha"
+    >
+    </app-primary-input>
+
+    <app-primary-button
+      buttonLabel="Entrar"
+      buttonType="submit"
+      (onClick)="efetuarRegistro()"
+    >
+    </app-primary-button>
+  </form>
+  <p>Já tem uma conta? <a href="/login">Fazer Login</a></p>
+</app-login-register-layout>

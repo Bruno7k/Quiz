@@ -1,0 +1,11 @@
+<button
+  class="question-option-button"
+  (click)="handleClick($event)"
+  [type]="buttonType"
+  [ngClass]="{
+    correct: isTheCorrectAnswer && isClicked,
+    incorrect: !isTheCorrectAnswer && isClicked
+  }"
+>
+  {{ buttonLabel }}
+</button>
