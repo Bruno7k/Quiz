@@ -3,6 +3,7 @@ import { QuestionOptionButtonComponent } from '../../components/buttons/question
 import PerguntaDTO from '../../../models/PerguntaDTO';
 import { PerguntaService } from '../../services/pergunta/pergunta.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-quiz',
@@ -16,7 +17,8 @@ export class QuizComponent {
 
   constructor(
     private _perguntaService: PerguntaService,
-    private router: Router
+    private router: Router,
+    private _toastService: ToastrService
   ) {}
   ngOnInit() {
     this.obterQuiz();
@@ -29,6 +31,10 @@ export class QuizComponent {
         this.perguntas[0].jaRespondida = true;
       },
       error: (error) => {
+        this._toastService.error(
+          'Perguntas insuficientes no banco de questões'
+        );
+        this.router.navigate(['']);
         console.error(error);
       },
     });

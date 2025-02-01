@@ -13,6 +13,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-admin',
   imports: [
@@ -41,7 +42,10 @@ export class AdminComponent {
     alternativaCorreta: new FormControl(),
   });
 
-  constructor(private _perguntaService: PerguntaService) {}
+  constructor(
+    private _perguntaService: PerguntaService,
+    private _toastService: ToastrService
+  ) {}
 
   ngOnInit() {
     this.carregarPerguntas();
@@ -100,8 +104,10 @@ export class AdminComponent {
       next: (perguntaResponse) => {
         console.log(perguntaResponse);
         this.carregarPerguntas();
+        this._toastService.success('Pergunta atualizada com sucesso!');
       },
       error: (error) => {
+        this._toastService.error('Erro ao atualizar pergunta');
         console.error(error);
       },
     });
@@ -121,8 +127,10 @@ export class AdminComponent {
       next: (perguntaResponse) => {
         this.carregarPerguntas();
         this.fecharModalAdicionarPergunta();
+        this._toastService.success('Pergunta criada com sucesso!');
       },
       error: (error) => {
+        this._toastService.error('Erro ao criar pergunta');
         console.error(error);
       },
     });

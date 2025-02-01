@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { PrimaryInputComponent } from '../../components/inputs/primary-input/primary-input.component';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 export class HomeComponent {
   constructor(
     private _usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private _toastService: ToastrService
   ) {}
 
   alterarSenha = false;
@@ -82,8 +84,10 @@ export class HomeComponent {
         this.editarPerfilForm.controls.novaSenha.setValue('');
         this.alterarSenha = false;
         this.modalEditarPerfilAberto = false;
+        this._toastService.success('Perfil atualizado com sucesso!');
       },
       error: (err) => {
+        this._toastService.error('Erro ao atualizar perfil!');
         console.error(err);
       },
     });
