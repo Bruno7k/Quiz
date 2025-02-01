@@ -25,10 +25,12 @@ export class ResultadoComponent {
       return '📚 Você já pegou em um livro? Hora de começar! 😅';
     } else if (this.quantidadeAcertos < 3) {
       return '😬 Vixe! Tá precisando estudar mais... Mas não desista! 💪';
-    } else if (this.quantidadeAcertos < 6) {
+    } else if (this.quantidadeAcertos < 9) {
       return '📖 Você está no caminho certo! Continue assim! 🚀';
-    } else {
+    } else if (this.quantidadeAcertos == 10) {
       return '🎉 Parabéns! Você acertou tudo!!! 🏆🔥';
     }
+
+    return '';
   }
 }

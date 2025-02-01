@@ -39,21 +39,23 @@ export class HomeComponent {
   });
 
   ngOnInit() {
-    this.getUsuarioLogado();
+    this.verificarAutenticacao();
   }
 
-  getUsuarioLogado() {
+  verificarAutenticacao() {
     this._usuarioService.obterLogado().subscribe({
       next: (usuario) => {
-        //Setando Usuario Logado
-        this.usuarioLogado = usuario;
-
-        //Setando valores nos campos do formulário
-        this.editarPerfilForm.controls.nomeCompleto.setValue(usuario.nome);
-        this.editarPerfilForm.controls.email.setValue(usuario.email);
+        if (!usuario) {
+          this.router.navigate(['/login']);
+        } else {
+          this.usuarioLogado = usuario;
+          this.editarPerfilForm.controls.nomeCompleto.setValue(usuario.nome);
+          this.editarPerfilForm.controls.email.setValue(usuario.email);
+        }
       },
       error: (err) => {
         console.error(err);
+        this.router.navigate(['/login']);
       },
     });
   }

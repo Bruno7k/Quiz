@@ -1,0 +1,148 @@
+<div class="body">
+  <header>
+    <img src="logo.svg" alt="Logo" />
+    <div class="logo-line">
+      <h1>Banco De Perguntas</h1>
+    </div>
+
+    <div class="button-line">
+      <div class="button-wrapper">
+        <app-secondary-button
+          buttonLabel="Adicionar Pergunta"
+          (click)="abrirModalAdicionarPergunta()"
+        />
+      </div>
+    </div>
+  </header>
+
+  <main>
+    @for (pergunta of perguntas; track $index) {
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Q{{ $index + 1 }}: {{ pergunta.enunciado }}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <form [formGroup]="perguntaForms.at($index)">
+        <app-primary-input
+          labelTitle="Enunciado:"
+          type="text"
+          placeholder="Enunciado"
+          name="enunciado"
+          formControlName="enunciado"
+        />
+        <div class="input-grid">
+          <app-primary-input
+            labelTitle="Alternativa 1:"
+            type="text"
+            placeholder="Alternativa 1"
+            name="alternativa1"
+            formControlName="alternativa1"
+          />
+          <app-primary-input
+            labelTitle="Alternativa 2:"
+            type="text"
+            placeholder="Alternativa 2"
+            name="alternativa2"
+            formControlName="alternativa2"
+          />
+          <app-primary-input
+            labelTitle="Alternativa 3:"
+            type="text"
+            placeholder="Alternativa 3"
+            name="alternativa3"
+            formControlName="alternativa3"
+          />
+          <app-primary-input
+            labelTitle="Alternativa 4:"
+            type="text"
+            placeholder="Alternativa 4"
+            name="alternativa4"
+            formControlName="alternativa4"
+          />
+        </div>
+        <label id="questao-certa-label"
+          >Qual das alternativas é a correta?</label
+        >
+        <mat-radio-group
+          aria-labelledby="questao-certa-label"
+          formControlName="alternativaCorreta"
+        >
+          <mat-radio-button value="1">1</mat-radio-button>
+          <mat-radio-button value="2">2</mat-radio-button>
+          <mat-radio-button value="3">3</mat-radio-button>
+          <mat-radio-button value="4">4</mat-radio-button>
+        </mat-radio-group>
+        <br />
+        <div class="button-row">
+          <button (click)="atualizaPergunta($index)">Salvar Alterações</button>
+        </div>
+      </form>
+    </mat-expansion-panel>
+    }
+  </main>
+</div>
+
+<!-- Modal Adicionar Pergunta -->
+@if (modalAdicionarPerguntaAberto) {
+<div class="modal">
+  <div class="modal-content">
+    <span class="close-btn" (click)="fecharModalAdicionarPergunta()">×</span>
+    <h2>Adicionar Nova Pergunta:</h2>
+    <form [formGroup]="novaPerguntaForm">
+      <app-primary-input
+        labelTitle="Enunciado:"
+        type="text"
+        placeholder="Enunciado"
+        name="enunciado"
+        formControlName="enunciado"
+      />
+      <div class="input-grid">
+        <app-primary-input
+          labelTitle="Alternativa 1:"
+          type="text"
+          placeholder="Alternativa 1"
+          name="alternativa1"
+          formControlName="alternativa1"
+        />
+        <app-primary-input
+          labelTitle="Alternativa 2:"
+          type="text"
+          placeholder="Alternativa 2"
+          name="alternativa2"
+          formControlName="alternativa2"
+        />
+        <app-primary-input
+          labelTitle="Alternativa 3:"
+          type="text"
+          placeholder="Alternativa 3"
+          name="alternativa3"
+          formControlName="alternativa3"
+        />
+        <app-primary-input
+          labelTitle="Alternativa 4:"
+          type="text"
+          placeholder="Alternativa 4"
+          name="alternativa4"
+          formControlName="alternativa4"
+        />
+      </div>
+      <label id="questao-certa-label">Qual das alternativas é a correta?</label>
+      <mat-radio-group
+        aria-labelledby="questao-certa-label"
+        formControlName="alternativaCorreta"
+      >
+        <mat-radio-button value="1">1</mat-radio-button>
+        <mat-radio-button value="2">2</mat-radio-button>
+        <mat-radio-button value="3">3</mat-radio-button>
+        <mat-radio-button value="4">4</mat-radio-button>
+      </mat-radio-group>
+      <br />
+      <div class="button-row">
+        <button (click)="criarNovaPergunta()">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+</div>
+}

@@ -28,9 +28,13 @@ export class PerguntaService extends BaseHttpService {
     return this.post(this.urlBase + '/salvar', pergunta);
   }
 
-  atualizar(pergunta: PerguntaDTO) {
-    const httpParams = new HttpParams().set('id', pergunta.id!.toString());
-    return this.put(this.urlBase + '/atualizar', pergunta, httpParams);
+  atualizar(pergunta: PerguntaDTO): Observable<PerguntaDTO> {
+    const httpParams = new HttpParams().set('id', pergunta.id!);
+    return this.put<PerguntaDTO>(
+      this.urlBase + '/atualizar',
+      pergunta,
+      httpParams
+    );
   }
 
   deletar(id: number) {
