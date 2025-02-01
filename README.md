@@ -1,7 +1,5 @@
 # Quiz
 
-# Delicias do DCC
-
 Sistema feito para o trabalho de desenvolvimento WEB
 
 ## Tecnologias utilizadas
